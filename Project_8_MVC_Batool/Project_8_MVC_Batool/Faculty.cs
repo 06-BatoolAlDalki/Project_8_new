@@ -11,7 +11,8 @@ namespace Project_8_MVC_Batool
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Faculty
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,8 +22,14 @@ namespace Project_8_MVC_Batool
         }
     
         public int FaculityID { get; set; }
+
+        [Display (Name ="Name")]
         public string FaculityName { get; set; }
+
+        [Display (Name ="Photo")]
         public string Faculity_Image { get; set; }
+
+        [Display (Name ="Description")]
         public string Faculity_Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

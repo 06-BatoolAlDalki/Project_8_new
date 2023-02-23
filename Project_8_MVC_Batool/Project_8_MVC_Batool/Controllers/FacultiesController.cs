@@ -14,10 +14,37 @@ namespace Project_8_MVC_Batool.Controllers
     {
         private Project_8Entities db = new Project_8Entities();
 
+
+
+
+        //public ActionResult CheckProducts(int id)
+        //{
+        //    Faculty faculty = db.Faculties.Find(id);
+        //    if (faculty.Majors.Count() > 0)
+        //    {
+        //        return Json(new { error = true, message = "Cannot delete category with associated products." });
+        //    }
+        //    else
+        //    {
+        //        db.Faculties.Remove(faculty);
+        //        db.SaveChanges();
+        //        return Json(new { error = false });
+        //    }
+        //}
+
+
+
+
+
+
+
         // GET: Faculties
-        public ActionResult Index()
+        public ActionResult Index( string name)
         {
-            return View(db.Faculties.ToList());
+
+
+            var result = db.Faculties.Where(s=>s.FaculityName.Contains(name) || name==null).ToList();
+            return View(result);
         }
 
         // GET: Faculties/Details/5
@@ -62,6 +89,7 @@ namespace Project_8_MVC_Batool.Controllers
                
                 db.Faculties.Add(faculty);
                 db.SaveChanges();
+                TempData["message"] = "Faculity Created Successfully";
                 return RedirectToAction("Index");
             }
             return View(faculty);
@@ -109,6 +137,7 @@ namespace Project_8_MVC_Batool.Controllers
 
                 db.Entry(faculty).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["message"] = "Faculity Has Edited Successfully";
                 return RedirectToAction("Index");
             }
             return View(faculty);
@@ -135,8 +164,19 @@ namespace Project_8_MVC_Batool.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Faculty faculty = db.Faculties.Find(id);
-            db.Faculties.Remove(faculty);
-            db.SaveChanges();
+            int majorCount = db.Majors.Where(s=>s.Faculity_ID==id).Count();
+            if (majorCount > 0)
+            {
+                TempData["Count"] = "You can not delete this Faculity Before Delete the majors that related to this faculity";
+
+            }
+            else
+            {
+                db.Faculties.Remove(faculty);
+                db.SaveChanges();
+                TempData["message"] = "Faculity has Deleted Successfully";
+            }
+           
             return RedirectToAction("Index");
         }
 

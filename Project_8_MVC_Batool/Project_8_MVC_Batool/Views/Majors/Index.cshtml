@@ -4,7 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br />
+<br />
+<h2 style="color: #51be78 ">Majors</h2>
 <style>
     .thumbnail {
         top: -50px;
@@ -21,67 +23,92 @@
         .thumbnail:hover {
             transform: scale(5);
         }
+
+
+    body {
+        background-color: white;
+    }
 </style>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Success! </strong> @TempData["Message"]
+    </div>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table table-responsive">
-    <tr>
-        <th>
-            Name
-        </th>
 
-        <th>
-        Description
-        </th>
-        <th>
-          Price
-        </th>
-        <th>
-            Number of Hour
-        </th>
-        <th>
-           Minimum Rate
-        </th>
-        <th>
-           Faculity
-        </th>
-        <th>
-          Image
-        </th>
-        <th></th>
-    </tr>
+<br />
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MajorName)
-        </td>
+@using (Html.BeginForm("Index", "Majors", FormMethod.Post))
+{
+    <div style="margin-left:25%">
+        @Html.TextBox("name")
+        <input type="submit" value="Search" style="background-color: #51be78 ; color:white ;border:3px solid #51be78 ;"/>
+        </div>
+        }
+<br />
+<br />
+        <table class="table table-responsive">
+            <tr>
+                <th>
+                    Name
+                </th>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Major_Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price_OfHour)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Number_OfHour)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.minimum_rate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Faculty.FaculityName)
-        </td>
-        <td>
-<img  src="~/image/@item.MajorImage" width="50" height="50" class="thumbnail" />   
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.MajorID } , new { @class = "btn btn-success" }) |
-            @Html.ActionLink("Details", "Details", new { id = item.MajorID } , new { @class = "btn btn-info" }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.MajorID } , new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
+                <th>
+                    Description
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Number of Hour
+                </th>
+                <th>
+                    Minimum Rate
+                </th>
+                <th>
+                    Faculity
+                </th>
+                <th>
+                    Image
+                </th>
+                <th></th>
+            </tr>
 
-</table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MajorName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Major_Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price_OfHour) JD
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Number_OfHour)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.minimum_rate) %
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Faculty.FaculityName)
+                    </td>
+                    <td>
+                        <img src="~/image/@item.MajorImage" width="50" height="50" class="thumbnail" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MajorID }, new { @class = "btn btn-success" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.MajorID }, new { @class = "btn btn-info" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MajorID }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>

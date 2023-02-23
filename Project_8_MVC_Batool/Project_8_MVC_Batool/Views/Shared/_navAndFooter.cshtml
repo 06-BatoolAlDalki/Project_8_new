@@ -53,7 +53,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="site-logo">
                         <a href="index.html" class="d-block">
-                            <img src="~/academics-master/images/logo.jpg" alt="Image" class="img-fluid">
+                            <img src="..\\image\\logo.png" alt="Image" width="100" height="80">
                         </a>
                     </div>
                     <div class="ml-auto"   >
@@ -68,12 +68,11 @@
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <li>
-                                        <a href="https://localhost:44370/Home/Admin" class="nav-link text-left">Admin</a>
+                                        <a href="https://localhost:44370/Students/statistics" class="nav-link text-left">Admin</a>
                                     </li>
                                 }
+                                else if(User.IsInRole("Student"))
 
-
-                                @if (User.IsInRole("Student"))
                                 {
                                     <li>
                                         <a href="https://localhost:44370/AspNetUsers/Details1/@User.Identity.GetUserId()" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i> Student Services</a>
@@ -134,12 +133,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3">
-                        <p class="mb-4"><img src="~/academics-master/images/logo.png" alt="Image" class="img-fluid"></p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nemo minima qui dolor, iusto iure.</p>
+                        <p class="mb-4"><img src="..\\image\\logo.png" alt="Image" style="width:150px ; height:100px"></p>
+                        <p style="color: #51be78">Developing competencies in various fields of science and knowledge through providing distinguished education and producing of innovative scientific research that serves the community and contributes to building a knowledge economy by creating a university environment that stimulates creativity, through freedom of expression and responding to the demands of society and scientific development..</p>
                         <p><a href="#">Learn More</a></p>
                     </div>
                     <div class="col-lg-3">
-                        <h3 class="footer-heading"><span>Our Campus</span></h3>
+                        <h3 class="footer-heading"><span>Link</span></h3>
                         <ul class="list-unstyled">
                             <li><a href="#">Acedemic</a></li>
                             <li><a href="#">News</a></li>
@@ -150,7 +149,7 @@
                         </ul>
                     </div>
                     <div class="col-lg-3">
-                        <h3 class="footer-heading"><span>Our Courses</span></h3>
+                        <h3 class="footer-heading"><span>Link</span></h3>
                         <ul class="list-unstyled">
                             <li><a href="#">Math</a></li>
                             <li><a href="#">Science &amp; Engineering</a></li>
@@ -163,11 +162,11 @@
                     <div class="col-lg-3">
                         <h3 class="footer-heading"><span>Contact</span></h3>
                         <ul class="list-unstyled">
-                            <li><a href="#">Help Center</a></li>
-                            <li><a href="#">Support Community</a></li>
+                            <li><a href="#"> Irbid - Jordan, P.O Box 566 ZipCode 21163</a></li>
+                            <li><a href="#">yarmouk@yu.edu.jo</a></li>
                             <li><a href="#">Press</a></li>
-                            <li><a href="#">Share Your Story</a></li>
-                            <li><a href="#">Our Supporters</a></li>
+                            <li><a href="#">7211111 2 962</a></li>
+                            
                         </ul>
                     </div>
                 </div>

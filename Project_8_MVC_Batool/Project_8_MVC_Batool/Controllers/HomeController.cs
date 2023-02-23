@@ -15,6 +15,11 @@ namespace Project_8_MVC_Batool.Controllers
             return View();
         }
 
+        public ActionResult contactUS()
+        {
+            return View();
+        }
+
         [Authorize (Roles ="Admin")]
         public ActionResult Admin()
         {

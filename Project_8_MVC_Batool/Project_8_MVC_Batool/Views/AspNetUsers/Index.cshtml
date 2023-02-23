@@ -3,31 +3,65 @@
 @{
     ViewBag.Title = "Index";
 }
+<!-- partial:index.partial.html -->
 
+
+<style>
+    body {
+        background-color: white;
+    }
+</style>
 <br />
 <br />
 <h2 style="color: #51be78">Application for the University </h2>
 
 <br />
 <br />
-
-<table class="table table-active table-striped ">
+<div class="form-group">
+    <div class="input-group">
+        @using (Html.BeginForm("Index", "AspNetUsers", FormMethod.Get))
+        {
+          
+          
+            <div class="form-group" style="margin-left:0px">
+                <div class="form-check form-check-inline">
+                    @Html.RadioButton("searchBy", "0", false, new { @class = "form-check-input" })
+                    <label class="form-check-label" for="firstNameRadio">Pending</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    @Html.RadioButton("searchBy", "1", false, new { @class = "form-check-input" })
+                    <label class="form-check-label" for="lastNameRadio">Accepted</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    @Html.RadioButton("searchBy", "2", false, new { @class = "form-check-input" })
+                    <label class="form-check-label" for="emailRadio">Rejected</label>
+                </div>
+                <button class="btn btn-secondary" type="submit" style="background-color: #51be78 ; color:white ">
+                    Search
+                </button>
+            </div>
+        }
+    </div>
+</div>
+<br />
+<br />
+<table class="table " style="width:100%">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
-       
-        
-        
+
+
+
         <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
-       
+
         <th>
             @Html.DisplayNameFor(model => model.SSN)
         </th>
-       
-       
+
+
         <th>
             @Html.DisplayNameFor(model => model.Is_Send)
         </th>
@@ -37,47 +71,48 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        
-       
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.SSN)
-        </td>
-        
-       
-        <td>
-            @if (item.Is_Send == null)
-            {
-               <label>Pending</label>
-            }
-            else if (item.Is_Send == 1)
-            {
-                <label style="color:green">Accepted</label>
-            }
-            else
-            {
-               <label style="color:red">Rejected</label>
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Major.MajorName)
-        </td>
-        <td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
 
-            <a href="/AspNetUsers/Edit/@item.Id" style=" color: white" class = "btn btn-success" >Edit </a> |
-            <a href="/AspNetUsers/Details/@item.Id" style=" color: white" class = "btn btn-info" >Details</a>
 
-        </td>
-    </tr>
-}
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SSN)
+            </td>
+
+
+            <td>
+                @if (item.Is_Send == null)
+                {
+                    <label>Pending</label>
+                }
+                else if (item.Is_Send == 1)
+                {
+                    <label style="color:green">Accepted</label>
+                }
+                else
+                {
+                    <label style="color:red">Rejected</label>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Major.MajorName)
+            </td>
+            <td>
+
+                <a href="/AspNetUsers/Edit/@item.Id" style=" color: white" class="btn btn-success">Edit </a> |
+                <a href="/AspNetUsers/Details/@item.Id" style=" color: white" class="btn btn-info">Details</a>
+
+            </td>
+        </tr>
+    }
 
 </table>

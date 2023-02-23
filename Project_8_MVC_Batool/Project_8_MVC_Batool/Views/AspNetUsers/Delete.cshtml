@@ -165,12 +165,43 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<div class="form-actions no-color">
+    <button id="delete-category" data-id="@Model.Id" type="submit" class="btn btn-default">Delete</button>
+
+    |
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+
+
+
     }
 </div>
+
+
+
+<div id="message">batool</div>
+<script>
+    $(document).ready(function() {
+        $('#delete-category').click(function() {
+            var categoryId = $(this).data('id');
+            $.ajax({
+                url: '/Faculties/CheckProducts/' + categoryId,
+                type: 'GET',
+                success: function(result) {
+                    if (result.error) {
+                        $('#message').text(result.message);
+                    } else {
+                        $('#message').text('Category deleted successfully.');
+                    }
+                }
+            });
+        });
+    });
+</script>

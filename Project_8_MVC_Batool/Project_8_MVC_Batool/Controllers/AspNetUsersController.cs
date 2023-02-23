@@ -14,7 +14,6 @@ using Project_8_MVC_Batool;
 namespace Project_8_MVC_Batool.Controllers
 {
 
-    [Authorize]
     public class AspNetUsersController : Controller
     {
         private Project_8Entities db = new Project_8Entities();
@@ -22,10 +21,39 @@ namespace Project_8_MVC_Batool.Controllers
         // GET: AspNetUsers
 
         [Authorize (Roles ="Admin")]
-        public ActionResult Index()
+        public ActionResult Index(string searchString, string searchBy)
         {
-            var aspNetUsers = db.AspNetUsers.Include(a => a.Major);
-            return View(aspNetUsers.ToList());
+
+            var task = from s in db.AspNetUsers select s ;
+
+            if (String.IsNullOrEmpty(searchString))
+            {
+
+                switch (searchBy)
+                {
+                    case "0":
+                        task = task.Where(s => s.Is_Send == null);
+                        break;
+                    case "1":
+                        task = task.Where(s => s.Is_Send == 1);
+                        break;
+                    case "2":
+                        task = task.Where(s => s.Is_Send == 2);
+                        break;
+                    default:
+                        task = task;
+                        break;
+
+                }
+            }
+                if (task.ToList().Count <= 0 || searchString == "")
+                {
+                    ViewBag.SearchString = "Not Found";
+                }
+            
+            return View(task.ToList());
+
+           // return View(task.ToList());
         }
 
 
@@ -162,6 +190,10 @@ namespace Project_8_MVC_Batool.Controllers
             Session["ECon"] = aspNetUser.UserName;
             Session["pass"] = aspNetUser.PasswordHash;
             Session["sec"] = aspNetUser.SecurityStamp;
+            Session["balance"] = aspNetUser.Balance;
+            Session["debet"] = aspNetUser.debet;
+            Session["status_D"] = aspNetUser.stutus_ofDelay;
+            Session["status_P"] = aspNetUser.Stutus_OfPayment;
             if (aspNetUser == null)
             {
                 return HttpNotFound();
@@ -230,6 +262,13 @@ namespace Project_8_MVC_Batool.Controllers
             aspNetUser.UserImage = Session["UImage"].ToString();
          aspNetUser.Tawjihi_Image=   Session["TImage"].ToString() ;
             aspNetUser.SecurityStamp = Session["sec"].ToString();
+
+
+
+            aspNetUser.Balance= (double)Session["balance"] ;
+            aspNetUser.debet=(double) Session["debet"]  ;
+            aspNetUser.stutus_ofDelay= (int)Session["status_D"] ;
+            aspNetUser.Stutus_OfPayment= (int)Session["status_P"] ;
             var x = Session["SSN"];
             int x1 = Convert.ToInt32(x);
             aspNetUser.SSN =x1 ;

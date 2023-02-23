@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Project_8_MVC_Batool.Major>
+
+@{
+    ViewBag.Title = "IndexBatool";
+    Layout = "~/Views/Shared/_Dashboard1.cshtml";
+}
+
+<h2>IndexBatool</h2>
+
+
+
+@Html.ActionLink( "edit", "Index")
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MajorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MajorImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Major_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price_OfHour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Number_OfHour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.minimum_rate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Faculty.FaculityName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MajorName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MajorImage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Major_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price_OfHour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number_OfHour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.minimum_rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Faculty.FaculityName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MajorID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MajorID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MajorID })
+        </td>
+    </tr>
+}
+
+</table>

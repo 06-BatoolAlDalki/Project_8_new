@@ -957,6 +957,8 @@
     <Content Include="Views\AspNetUsers\Logout.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
     <Content Include="Views\Students\statistics.cshtml" />
+    <Content Include="Views\Majors\IndexBatool.cshtml" />
+    <Content Include="Views\Home\contactUS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

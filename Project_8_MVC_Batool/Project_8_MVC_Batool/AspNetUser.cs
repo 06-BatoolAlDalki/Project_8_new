@@ -11,7 +11,8 @@ namespace Project_8_MVC_Batool
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class AspNetUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -36,17 +37,25 @@ namespace Project_8_MVC_Batool
         public Nullable<System.DateTime> LockoutEndDateUtc { get; set; }
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
+        [Display(Name = ("Student Name"))]
         public string UserName { get; set; }
+        [Display (Name =("Photo"))]
         public string UserImage { get; set; }
+        [Display(Name ="Certification")]
         public string Tawjihi_Image { get; set; }
         public Nullable<decimal> SSN { get; set; }
         public Nullable<int> Year_OfStudy { get; set; }
         public Nullable<double> GPA { get; set; }
         public Nullable<int> Is_Save { get; set; }
+
+        [Display(Name = ("Status"))]
         public Nullable<int> Is_Send { get; set; }
+        [Display(Name = ("Major"))]
         public Nullable<int> Major_id { get; set; }
         public string FullName { get; set; }
+        [Display(Name = ("Status of Delay"))]
         public Nullable<int> stutus_ofDelay { get; set; }
+        [Display(Name = ("Status of Payment"))]
         public Nullable<int> Stutus_OfPayment { get; set; }
         public Nullable<double> debet { get; set; }
         public Nullable<double> Balance { get; set; }

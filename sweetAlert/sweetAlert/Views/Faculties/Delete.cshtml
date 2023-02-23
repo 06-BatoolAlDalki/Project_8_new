@@ -1,0 +1,76 @@
+﻿@model sweetAlert.Faculty
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+<script src="~/Scripts/jquery-3.4.1.slim.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<button id="delete-category">Delete Category</button>
+
+<script>
+    $(document).ready(function () {
+        $('delete-category').click(function () {
+            var categoryId = 1;
+            swal({
+                url: '/Faculties/CheckProducts/' + categoryId,
+                type: 'GET',
+                success: function (result) {
+                    if (result.error) {
+                        alert("Delete");
+                    } else {
+                        alert("Delete");
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Faculty</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FaculityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FaculityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Faculity_Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Faculity_Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Faculity_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Faculity_Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

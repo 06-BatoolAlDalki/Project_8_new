@@ -13,7 +13,7 @@ using Project_8_MVC_Batool.Models;
 
 namespace Project_8_MVC_Batool.Controllers
 {
-    [Authorize]
+
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -160,6 +160,14 @@ namespace Project_8_MVC_Batool.Controllers
             return View();
         }
 
+
+        public ActionResult batool()
+        {
+
+            return View();
+        }
+
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -217,8 +225,8 @@ namespace Project_8_MVC_Batool.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    TempData["Message"] = "block";
+                   // return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }

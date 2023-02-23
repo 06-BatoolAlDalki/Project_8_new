@@ -1,0 +1,45 @@
+﻿@model IEnumerable<sweetAlert.Faculty>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="color: #51be78 ">Faculities</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FaculityName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Faculity_Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Faculity_Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FaculityName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Faculity_Image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Faculity_Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FaculityID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.FaculityID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FaculityID })
+        </td>
+    </tr>
+}
+
+</table>

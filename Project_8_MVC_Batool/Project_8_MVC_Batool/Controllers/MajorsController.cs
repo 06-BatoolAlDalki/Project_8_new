@@ -16,10 +16,25 @@ namespace Project_8_MVC_Batool.Controllers
     {
         private Project_8Entities db = new Project_8Entities();
 
+
+
+        //public ActionResult IndexBatool()
+        //{
+        //    var majors = db.Majors.Include(m => m.Faculty);
+
+        //    //SelectList l = new SelectList( ,"","" );
+        //    return View(majors.ToList());
+
+
+        //}
+
+
+
+
         // GET: Majors
-        public ActionResult Index()
+        public ActionResult Index(string name)
         {
-            var majors = db.Majors.Include(m => m.Faculty);
+            var majors = db.Majors.Where(s=>s.MajorName.Contains(name) || name == null);
             return View(majors.ToList());
         }
 
@@ -91,6 +106,7 @@ namespace Project_8_MVC_Batool.Controllers
                
                 db.Majors.Add(major);
                 db.SaveChanges();
+                TempData["Message"] = "The Major is Created Successfully";
                 return RedirectToAction("Index");
             }
 
@@ -140,6 +156,7 @@ namespace Project_8_MVC_Batool.Controllers
 
                 db.Entry(major).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["Message"] = "The Major is Edited Successfully";
                 return RedirectToAction("Index");
             }
 
@@ -172,6 +189,7 @@ namespace Project_8_MVC_Batool.Controllers
             Major major = db.Majors.Find(id);
             db.Majors.Remove(major);
             db.SaveChanges();
+            TempData["Message"] = "The Major is Deleted Successfully";
             return RedirectToAction("Index");
         }
 

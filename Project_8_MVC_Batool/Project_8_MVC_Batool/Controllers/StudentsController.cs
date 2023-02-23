@@ -188,7 +188,7 @@ namespace Project_8_MVC_Batool.Controllers
                 smtp.EnableSsl = true;
                 smtp.UseDefaultCredentials = false;
                 smtp.Host = "smtp.gmail.com";
-                smtp.Credentials = new System.Net.NetworkCredential("iahmed.hamaideh@gmail.com", "yheigdkvtpoeqrhl");
+                smtp.Credentials = new System.Net.NetworkCredential("iahmed.hamaideh@gmail.com", "rdocplurxoijtlgk");
 
                 smtp.Send(mail);
             }
