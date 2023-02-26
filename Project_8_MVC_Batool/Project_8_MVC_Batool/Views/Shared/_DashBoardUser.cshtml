@@ -1,6 +1,6 @@
-﻿
+﻿@using Microsoft.AspNet.Identity
 
-@using Microsoft.AspNet.Identity
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +36,11 @@
     <!-- Template Stylesheet -->
     <link href="~/dash/css/style.css" rel="stylesheet">
 
-
+    <style>
+        body{
+            background-color:white;
+        }
+    </style>
 
 </head>
 
@@ -52,21 +56,28 @@
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary" style="color: #51be78 !important">ADMIN</h3>
-                </a>
-                <div class="d-flex align-items-center ms-4 mb-4">
+                @*<a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary" style="color: #51be78 !important ; margin-left:50px" >USER</h3>
+                </a>*@
+               
+                <div style="margin-left:12px ; margin-top:30px ;margin-bottom:30px">
+                    @*@Html.Partial("~/Views/Students/userInfo.cshtml")*@
+
+                    </div>
+
+                <hr />
+                @*<div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
                         <img class="rounded-circle" src="~/image/7.png" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0">Batool</h6>
-                        <span>Admin</span>
+                        <span>USER</span>
                     </div>
-                </div>
+                </div>*@
                 <div class="navbar-nav w-100">
-                    <a href="/Students/pay2" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Financial   </a>
+                    <a href="/Students/pay2" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Student Finance   </a>
                     <a href="/Students/delay" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>postponement  </a>
 
 
@@ -92,7 +103,7 @@
         <!-- Content Start -->
         <div class="content">
             <!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0" style="background-color: #f3f6f9 !important;margin-left:-90px">
+            @*<nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0" style="background-color: #f3f6f9 !important;margin-left:-90px">
                 <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
                 </a>
@@ -115,10 +126,10 @@
                     </div>
                 </div>
 
-            </nav>
+            </nav>*@
             <!-- Navbar End -->
             <!-- Sale & Revenue Start -->
-
+           
             @RenderBody()
             <!-- Footer Start -->
             <!-- Footer End -->
@@ -141,7 +152,8 @@
 
     <!-- Template Javascript -->
     <script src="~/dash/js/main.js"></script>
-    <script>$(document).ready(function () {
+    <script>
+    $(document).ready(function () {
             var current = location.pathname;
             $('.navbar-nav a').each(function () {
                 var $this = $(this);

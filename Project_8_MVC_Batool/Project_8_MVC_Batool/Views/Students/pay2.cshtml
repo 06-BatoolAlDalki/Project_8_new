@@ -5,15 +5,23 @@
     Layout = "~/Views/Shared/_DashBoardUser.cshtml";
 }
 
-
+<br />
 <div style="margin:50px 0">
     <h2>
-        <span style="color: #42C2DF"> Payment</span>   <br /> <small> for recording materials  </small>
+        <span style="color: green">Student Finance</span>   <br />
     </h2>
 </div>
 <script src="~/Views/Students/pay2.js"></script>
 <link href="~/Views/Students/pay2.css" rel="stylesheet" />
 
+
+@if(TempData["pay"] !=null)
+            {
+
+    <div class="alert alert-success">
+        <strong>Success</strong> @TempData["pay"] , your Balance is @TempData["balance"]
+    </div>
+            }
 @using (Html.BeginForm("pay2", "Students", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()

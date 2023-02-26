@@ -27,6 +27,8 @@ namespace Project_8_MVC_Batool
         }
     
         public string Id { get; set; }
+
+        [EmailAddress]
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
         public string PasswordHash { get; set; }
@@ -44,7 +46,11 @@ namespace Project_8_MVC_Batool
         [Display(Name ="Certification")]
         public string Tawjihi_Image { get; set; }
         public Nullable<decimal> SSN { get; set; }
+
+        [Display (Name = ("Admission Year"))]
+
         public Nullable<int> Year_OfStudy { get; set; }
+        [Display(Name = ("Highschool Avg"))]
         public Nullable<double> GPA { get; set; }
         public Nullable<int> Is_Save { get; set; }
 

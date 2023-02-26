@@ -23,27 +23,31 @@
 
     <br /> <br />
 
-    <table class="table table-striped">
-        <tr>
-            <td><p>Name</p></td>
-            <td> @Html.DisplayFor(model => model.FullName)</td>
-        </tr>
-        <tr>
-            <td><p>Phone Number</p></td>
-            <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
-        </tr>
-        <tr>
-            <td><p>Email</p></td>
-            <td> @Html.DisplayFor(model => model.Email)</td>
-        </tr>
-        <tr>
-            <td><p>Major</p></td>
-            <td>@Html.DisplayFor(model => model.Major.MajorName)</td>
-        </tr>
-        <tr>
-            <td><p>Certificate year</p></td>
-            <td>@Html.DisplayFor(model => model.Year_OfStudy)</td>
-        </tr>
+           <table class="table table-striped" style="width:120%">
+               <tr>
+                   <td><p>Name</p></td>
+                   <td> @Html.DisplayFor(model => model.FullName)</td>
+               </tr>
+               <tr>
+                   <td><p>Phone Number</p></td>
+                   <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
+               </tr>
+               <tr>
+                   <td><p>Email</p></td>
+                   <td> @Html.DisplayFor(model => model.Email)</td>
+               </tr>
+               <tr>
+                   <td><p>Major</p></td>
+                   <td>@Html.DisplayFor(model => model.Major.MajorName)</td>
+               </tr>
+               <tr>
+                   <td><p>Certificate year</p></td>
+                   <td>@Html.DisplayFor(model => model.Year_OfStudy)</td>
+               </tr>
 
-    </table>
+               <tr>
+                   <td><p>Finance</p></td>
+                   <td>@Html.DisplayFor(model => model.Balance) JD</td>
+               </tr>
+           </table>
 </div>

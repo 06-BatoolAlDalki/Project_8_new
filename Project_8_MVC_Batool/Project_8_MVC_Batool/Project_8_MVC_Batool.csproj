@@ -250,6 +250,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\statisticss.cs" />
+    <Compile Include="Models\userInfos.cs" />
     <Compile Include="Payment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -959,6 +960,10 @@
     <Content Include="Views\Students\statistics.cshtml" />
     <Content Include="Views\Majors\IndexBatool.cshtml" />
     <Content Include="Views\Home\contactUS.cshtml" />
+    <Content Include="Views\Students\_user.cshtml" />
+    <Content Include="Views\Students\userInfo.cshtml" />
+    <Content Include="Views\Students\courseScudule_Block.cshtml" />
+    <Content Include="Views\Cours\courseScudule_Block.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

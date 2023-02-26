@@ -16,6 +16,16 @@ namespace Project_8_MVC_Batool.Controllers
         private Project_8Entities db = new Project_8Entities();
 
 
+        public PartialViewResult courseScudule_Block()
+        {
+            string userID = User.Identity.GetUserId();
+            var myCousrses = db.InRolements.Select(item => item).Where(item => item.UserID.Equals(userID));
+
+            return PartialView(myCousrses);
+        }
+
+
+
         [Authorize (Roles ="Student")]
         public ActionResult Usercourses(int? ID)
         {

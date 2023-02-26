@@ -1,7 +1,12 @@
 ﻿@model IEnumerable<Project_8_MVC_Batool.Cours>
 <br />
 <br />
-
+<br />
+<div style="margin:50px 0 ;text-align:center">
+    <h2>
+        <span style="color: green;text-align:center">Course Registration</span>   <br />
+    </h2>
+</div>
 
 <head>
     <script src="path/to/sweetalert.min.js"></script>
@@ -22,48 +27,83 @@
             padding: 100px 200px;
             border-radius: 20px;
             transform: translate(-50%,-50%);
-            background-color:white;
-            cursor:pointer;
+            background-color: white;
+            cursor: pointer;
         }
+
             #conf span {
-             position:absolute;
-             top:0;
-             right:0;
-             padding:10px;
-             background-color:black;
-             border-radius:50%;
-             transform:translate(50%,-50%);
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 10px;
+                background-color: black;
+                border-radius: 50%;
+                transform: translate(50%,-50%);
             }
     </style>
 </head>
 
 
-<div id="conf"> Time Conflict <span id="exit">X</span></div>
+@*<div id="conf"> Time Conflict <span id="exit">X</span></div>
+    @if (TempData["Message"] != null)
+    {
+
+
+        <script>
+            document.getElementById("conf").style.display = "block";
+            document.getElementById("exit").onclick = () => {
+                console.log("zsgzsdg")
+                document.getElementById("conf").style.display = "none";
+            }
+
+           /* alert("You are register this course before");*/
+        </script>
+    }*@
+
+@if (TempData["Message1"] != null)
+{
+    <div class="alert alert-warning">
+        <strong>Warning !</strong> @TempData["Message1"]
+    </div>
+}
 @if (TempData["Message"] != null)
 {
+    <div class="alert alert-warning">
+        <strong>Warning !</strong> @TempData["Message"]
+    </div>
+}
 
+@if (TempData["notEnough"] != null)
+{
+    <div class="alert alert-warning">
+        <strong>Warning !</strong> @TempData["notEnough"] , @TempData["Balance"]
+    </div>
+}
 
-    <script>
-        document.getElementById("conf").style.display = "block";
-        document.getElementById("exit").onclick = () => {
-            console.log("zsgzsdg")
-            document.getElementById("conf").style.display = "none";
-        }
-      
-       /* alert("You are register this course before");*/
-    </script>
+@if (TempData["add"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Successfully !</strong> @TempData["add"]
+    </div>
 }
 
 
-@if (TempData["notEnough"] !=null)
+
+@if (TempData["remove"] != null)
+{
+    <div class="alert alert-warning">
+        <strong>Warning !</strong> @TempData["remove"]
+    </div>
+}
+@*@if (TempData["notEnough"] !=null)
 
             {
       <script>
         alert("You are register this course before");
     </script>
 
-            }
-<div class="container col-8" style="width:82%!important ; margin:20px 50px ">
+            }*@
+<div class="container col-8" style="width:89%!important ; ">
 
 
     @{
@@ -77,74 +117,111 @@
         }
     </style>
 
-    @{
 
-        if (ViewBag.message == null)
+
+
+
+    @*if (ViewBag.message == null)
         {
             <script>
-            @*$(function() {
+            $(function() {
             swal("@TempData["Message"]");
-        });*@
+        });
 
             alert(TempData["Message"]);
             </script>
-        }
-    }
+        }*@
 
-    <h1>@TempData["Message"]</h1>
-    @Html.Action("courseScudule")
-    <br /><br />
-    <h3>Courses</h3>
-    <br />
-    <table class="table table-striped " border="1">
-        <tr>
-            <th>
-                Course Name
-            </th>
 
-            <th>
-                course Time
-            </th>
-            <th>
-                course Day
-            </th>
 
-            <th>
-                Add course
-            </th>
-        </tr>
+    <div style="display:block" id="div1">
 
-        @foreach (var item in Model)
-        {
-            int r = item.Times.Count() + 1;
-            <table class="table ">
-                <tr>
-                    <td rowspan="@r">
-                        @Html.DisplayFor(modelItem => item.CourseName)
+        @Html.Action("courseScudule")
+        <br /><br />
+        <button onclick="toggleDivs()" style="margin-left: 46%; background-color: #51be78; color: white; padding: 5px; border: 3px solid #51be78 ;border-radius:5px">Adoption</button>
+        <br />
+        <br />
+        <div style="margin:50px 0 ;text-align:center">
+            <h2>
+                <span style="color: green;text-align:center">Courses</span>   <br />
+            </h2>
+        </div>
+        <br />
+        <table class="table table-striped " border="1">
+            <tr>
+                <th>
+                    Course Name
+                </th>
 
-                    </td>
-                </tr>
+                <th>
+                    course Time
+                </th>
+                <th>
+                    course Day
+                </th>
 
-                @foreach (var sec in item.Times.ToList())
-                {
+                <th>
+                    Add course
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                int r = item.Times.Count() + 1;
+                <table class="table ">
                     <tr>
+                        <td rowspan="@r">
+                            @Html.DisplayFor(modelItem => item.CourseName)
 
-                        <td>
-                            @sec.Course_Time
-                        </td>
-                        <td>
-                            @sec.Course_Day
-                        </td>
-                        <td>
-                            <a href="AddCourse?secId=@sec.TimeID" class="btn btn-primary">add </a>
                         </td>
                     </tr>
 
-                }
-            </table>
+                    @foreach (var sec in item.Times.ToList())
+                    {
+                        <tr>
 
-        }
+                            <td>
+                                @sec.Course_Time
+                            </td>
+                            <td>
+                                @sec.Course_Day
+                            </td>
+                            <td>
+                                <a href="AddCourse?secId=@sec.TimeID" class="btn btn-primary">add </a>
+                            </td>
+                        </tr>
 
-    </table>
+                    }
+                </table>
+
+            }
+
+        </table>
+
+    </div>
 
 </div>
+
+<div style="display:none" id="div2">
+
+
+    @Html.Action("courseScudule_Block")
+
+</div>
+
+
+
+
+
+
+
+<script>
+    // JavaScript function
+    function toggleDivs() {
+        var div1 = document.getElementById("div1");
+        var div2 = document.getElementById("div2");
+
+        div1.style.display = "none";
+        div2.style.display = "block";
+    }
+</script>

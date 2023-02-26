@@ -1,0 +1,32 @@
+﻿
+@model IEnumerable<Project_8_MVC_Batool.InRolement>
+
+
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            Course Name
+        </th>
+        <th>
+            Time
+        </th>
+        <th>
+            Days
+        </th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>@item.Time.Cours.CourseName</td>
+            <td>@item.Time.Course_Time</td>
+            <td>@item.Time.Course_Day</td>
+
+        </tr>
+
+
+    }
+</table>
+

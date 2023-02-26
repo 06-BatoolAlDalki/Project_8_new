@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using Project_8_MVC_Batool.Models;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,19 @@ namespace Project_8_MVC_Batool.Controllers
             return View(model);
         }
 
+        public PartialViewResult userInfo()
+        {
+            var id = User.Identity.GetUserId();
+            string image = db.AspNetUsers.Find(id).UserImage;
+            string name = db.AspNetUsers.Find(id).FullName;
 
+            var model = new userInfos
+            {
+name= name,
+photo=image,
+            };
+            return PartialView(model);
+        }
 
 
 
@@ -53,9 +66,21 @@ namespace Project_8_MVC_Batool.Controllers
         }
 
 
+        public PartialViewResult courseScudule_Block()
+        {
+            string userID = User.Identity.GetUserId();
+            var myCousrses = db.InRolements.Select(item => item).Where(item => item.UserID.Equals(userID));
+
+            return PartialView(myCousrses);
+        }
+
+
         public ActionResult AddCourse(string secId)
         {
 
+            var id= User.Identity.GetUserId();
+            double? balance = db.AspNetUsers.Find(id).Balance;
+            TempData["Balance"] = balance;
             int secid = Convert.ToInt32(secId);
             string userid = User.Identity.GetUserId().ToString();
 
@@ -79,12 +104,14 @@ namespace Project_8_MVC_Batool.Controllers
             if (isConflict)
             {
 
-                TempData["Message"] = "Time Conflict in action";
+                TempData["Message"] = "You are registered other course at this Time previously !";
                 return Redirect("CourseRegist");
             }
 
             if (isExist)
             {
+                TempData["Message"] = "You are registered  this course previously";
+
                 return Redirect("CourseRegist");
             }
 
@@ -126,14 +153,14 @@ namespace Project_8_MVC_Batool.Controllers
             db.InRolements.Add(inr);
             db.SaveChanges();
 
-
+            TempData["add"] = "You are added course Successfully";
         }
 
         public ActionResult removeCourse(string enrolID)
         {
             db.InRolements.Remove(db.InRolements.Find(Convert.ToInt32(enrolID)));
             db.SaveChanges();
-
+            TempData["remove"] = "You are Deleted course Successfully";
             return Redirect("CourseRegist");
         }
         public PartialViewResult courseScudule()
@@ -175,6 +202,8 @@ namespace Project_8_MVC_Batool.Controllers
                 db.AspNetUsers.Find(id).Balance += Convert.ToDouble(z);
                 db.Payments.Add(payment);
                 db.SaveChanges();
+                TempData["pay"] = "You pay Successfully";
+                TempData["balance"] = db.AspNetUsers.Find(id).Balance;
                 var email = db.AspNetUsers.Find(id).Email;
                 MailMessage mail = new MailMessage();
                 mail.To.Add($"{email}".ToString().Trim());
@@ -228,9 +257,10 @@ namespace Project_8_MVC_Batool.Controllers
                 db.AspNetUsers.Find(id).stutus_ofDelay = 0;
                 db.Delays.Add(delay);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["Message"] = "Waiting the Doctor to accept your Request";
+                return RedirectToAction("delay");
             }
-            return View(delay);
+            return Redirect("delay");
         }
 
 

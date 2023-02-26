@@ -83,6 +83,13 @@ namespace Project_8_MVC_Batool.Controllers
                 return View(model);
             }
 
+            // var id = User.Identity.GetUserId();
+            // Console.WriteLine(id);
+            // var id1 = db.AspNetUsers.Find(id);
+            // Console.WriteLine(id1);
+            // var role1 = db.AspNetUserRoles.Find(id1).RoleId;
+            //int role = Convert.ToInt32(role1);
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -95,10 +102,47 @@ namespace Project_8_MVC_Batool.Controllers
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
+
+
+
+            //if (result== SignInStatus.Success && role == 1)
+            //{
+            //    return RedirectToLocal(returnUrl);
+            //}
+            //else if (result == SignInStatus.Success &&  role==3)
+            //{
+            //    return RedirectToLocal(returnUrl);
+            //}
+            //else if (result == SignInStatus.Success && role ==2)
+            //{
+            //    ModelState.AddModelError("", "Invalid login attempt.");
+            //    return View(model);
+            //}
+            //else if (result == SignInStatus.LockedOut)
+            //{
+            //    return View("Lockout");
+            //}
+            //else if (result == SignInStatus.RequiresVerification)
+            //{
+            //    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+            //}
+            //else if(result == SignInStatus.Failure)
+            //{
+            //    ModelState.AddModelError("", "Invalid login attempt.");
+            //    return View(model);
+
+            //}
+            //else
+            //{
+            //    ModelState.AddModelError("", "Invalid login attempt.");
+            //    return View(model);
+            //}
         }
 
         //
@@ -225,8 +269,8 @@ namespace Project_8_MVC_Batool.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    TempData["Message"] = "block";
-                   // return RedirectToAction("Index", "Home");
+                   // TempData["Message"] = "block";
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
