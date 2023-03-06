@@ -79,6 +79,10 @@ namespace Project_8_MVC_Batool.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
+       
+
     }
 
     public class ResetPasswordViewModel

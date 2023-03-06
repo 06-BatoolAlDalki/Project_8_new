@@ -156,8 +156,30 @@ photo=image,
             TempData["add"] = "You are added course Successfully";
         }
 
-        public ActionResult removeCourse(string enrolID)
+        public ActionResult removeCourse(string enrolID , string userID , string secID)
         {
+            var curs = new Cours();
+            foreach (var course in db.Courses)
+            {
+                foreach (var sec in course.Times)
+                {
+                    if (sec.TimeID == Convert.ToInt32(secID))
+                    {
+                        curs = course;
+                    }
+                }
+            }
+
+            var major = db.Majors.Find(curs.Major_ID);
+
+            int? price = curs.Number_OfHour * major.Price_OfHour;
+
+
+
+            db.AspNetUsers.Find(userID).Balance +=price ;
+
+
+
             db.InRolements.Remove(db.InRolements.Find(Convert.ToInt32(enrolID)));
             db.SaveChanges();
             TempData["remove"] = "You are Deleted course Successfully";

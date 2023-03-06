@@ -17,12 +17,13 @@
     </tr>
     @foreach (var item in Model)
     {
+       
 
         <tr>
             <td>@item.Time.Cours.CourseName</td>
             <td>@item.Time.Course_Time</td>
             <td>@item.Time.Course_Day</td>
-            <td><a href="removeCourse?enrolID=@item.Course_Student_Id" class="btn btn-danger"> Remove</a></td>
+            <td><a href="removeCourse?enrolID=@item.Course_Student_Id&userID=@item.UserID&secID=@item.Time_ID" class="btn btn-danger"> Remove</a></td>
         </tr>
 
 
